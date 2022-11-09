@@ -1,0 +1,263 @@
+
+.body{
+    background-image: url('../../assets/backgroundLegend2.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+}
+.titulo {
+    text-align: center;
+    font-weight: 700;
+    font-family: "Playfair Display SC";
+    color: rgb(170, 5, 5);
+}
+
+.box_form {
+    background-color: rgba(159, 141, 4, 0.9);
+    padding: 45px 0;
+    border-radius: 10px;
+    box-shadow: 
+    0 0 5px rgb(255 240 243),
+    0 0 10px rgb(255 204 213),
+    0 0 15px rgb(255 179 193),
+    0 0 20px rgb(255 143 163),
+    0 0 25px rgb(255 117 143),
+    0 0 30px rgb(255 77 109);
+    height: auto;
+    display: inline-block;
+    margin-top: 20px;
+    width: 60vw;
+    max-width: 800px;
+
+}
+
+.form {
+    width: 100%;
+    margin: auto;
+}
+
+.grupo {
+    position: relative;
+    margin: 45px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.create_input {
+    background: none;
+    color: #504e4e;
+    font-size: 18px;
+    padding: 4px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #49454567;
+}
+
+.create_input:focus {
+    outline: none;
+    color: #5e5d5d
+}
+
+
+
+.create_input:focus~.label,
+.create_input:valid~.label {
+    top: -14px;
+    font-size: 15px;
+    color: #495867;
+}
+
+.textarea {
+    width: 470px;
+    max-width: 470px;
+    height: 110px;
+    max-height: 120px;
+    padding: 10px;
+    background: rgb(225, 202, 202);
+    outline: none;
+    color: black;
+    font-family: monospace;
+    font-size: 0.875em;
+    border: solid 2px #49454567;
+}
+
+.label {
+    color: rgb(144, 5, 5);
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    transition: 0.5s all;
+    pointer-events: none;
+}
+.description { 
+    color:  rgb(144, 5, 5);
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: -25px;
+    left: 5px;
+    transition: 0.5s all;
+    pointer-events: none;
+}
+
+textarea:focus~.label,
+textarea:valid~.label{
+    top: -30px;
+    font-size: 18px;
+    color: black;
+    
+}
+
+.barra{
+    /* position:relative; */
+    float:left;
+    display: block;
+    width: 50%;
+    color:  rgb(170, 5, 5);
+    font-family: monospace;
+    font-size: 18px;
+}
+
+.barra::before{
+    content: "";
+    height: 2px;
+    width: 0%;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(to right, #B06AB3, #4568DC);
+    transition: 0.3s ease width;
+    left: 0;
+}
+
+.create_input:focus~.barra::before{
+    width: 100%;
+}
+
+.btn_submit{
+    font-family: system-ui;
+    background:  rgb(170, 5, 5);
+    border: 1px solid;
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    color: #fff;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 
+    0 0 2px rgb(255 240 243), 
+    0 0 4px rgb(255 204 213), 
+    0 0 6px rgb(255 179 193), 
+    0 0 8px rgb(255 143 163), 
+    0 0 10px rgb(255 117 143), 
+    0 0 12px rgb(255 77 109);
+}
+
+.select_create {
+    background-color: #FFCDB2;
+    color: black;
+    padding: 7px;
+    font-size: 16px;
+    appearance: button;
+    outline: none;
+    margin: 10px;
+    font-family: system-ui;
+}
+
+.select_create .option_create {
+padding: 30px;
+}
+
+.danger {
+    color: #d90429;
+    line-height: 0px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.box_opcion {
+display: inline-block;
+margin-right: 10px;
+margin-bottom: 15px;
+background-color: #fbb1bd;
+padding: 5px;
+border-radius: 5px;
+}
+
+.opcion_title {
+display: inline-block;
+margin-right: 10px;
+font-size: 12px;
+}
+
+.btn_remove {
+display: inline-block;
+width: 30px;
+text-align: center;
+padding: 0;
+height: 20px;
+background: #a4133c;
+}
+
+.x {
+    color: white;
+}
+
+.box_home {
+margin-top: 20px;
+}
+
+.back_home {
+border-radius: 8px;
+padding: 8px;
+text-decoration: none;
+font-family: system-ui;
+background: rgb(170, 5, 5);
+border: 1px solid;
+display: block;
+width: 20%;
+margin: 10px auto;
+color: #fff;
+height: 40px;
+font-size: 16px;
+cursor: pointer;
+align-items: center;
+box-shadow: 
+0 0 2px rgb(255 240 243), 
+0 0 4px rgb(255 204 213), 
+0 0 6px rgb(255 179 193), 
+0 0 8px rgb(255 143 163), 
+0 0 10px rgb(255 117 143), 
+0 0 12px rgb(255 77 109);
+font-weight: 400;
+}
+
+.platformTitle{
+    color:  rgb(170, 5, 5);
+    font-family: monospace;
+    font-size: 18px;
+    margin-left: 5px;
+}
+.platformContent{
+    float:left;
+    margin-left: 25px;
+
+}
+
+.genresPlatformContent{
+    
+    margin-left: 70px;
+    margin-right: 70px;
+    color: rgb(170, 5, 5);
+}
+
+.option_create{
+    border-color: black;
+    border-radius: 3px;
+}

@@ -1,0 +1,32 @@
+.nav {
+    margin: 25px;
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav button {
+    outline: none;
+    border: none;
+    margin-left: 9px;
+    padding: 9px 12px;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #064575;
+    color: #FF4C29;
+    cursor: pointer;
+    box-shadow: 3px 2px 8px rgba(250, 247, 247, 0.3);
+    transition: all 0.17s ease-in;
+    border-radius: 4px;
+}
+
+.nav button:hover {
+    background-color: #FF4C29;
+    color: #064575;
+}
+
+@media only screen and (max-width:768px){
+    
+.nav button {
+    margin-bottom: 10px;
+}
+}

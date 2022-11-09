@@ -1,0 +1,54 @@
+.navBar{
+  background-image: url('../../assets/BannerNeónAzulVioletaChico.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: monospace;
+  display: inherit;
+  font-size: 20px;
+  font-weight: bold;
+  padding: auto;
+}
+  .ulnav {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .linav {
+      float: left;
+    }
+    .linav :hover:not(.active) {
+      background-color: rgb(126, 0, 0);
+     
+    }
+  .navitem{ 
+      display: block;
+      color: rgb(240, 213, 78);
+      text-align: center;
+      padding: 18px 19px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    .active {
+      background-color: #000000;
+      float: right;
+    }
+
+    .home{
+      font-size: large;
+      margin-top: 12px;
+      margin-left: 10px;
+    }
+    .back{
+      display:block;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color:rgb(83, 20, 20);
+      font-weight: bold;
+      background-color:rgb(240, 213, 78);
+      margin-left:1200px;
+      
+      
+    }
