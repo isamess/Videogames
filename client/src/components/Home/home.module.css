@@ -10,7 +10,7 @@
 
 .container {
   display:flex;
-  margin: 21%;
+  margin: 10px;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;

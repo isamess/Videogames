@@ -7,6 +7,10 @@
   font-size: 20px;
   font-weight: bold;
   padding: auto;
+  border-bottom: 8px;
+  border-bottom-style:groove;
+  border-bottom-color: rgb(205, 3, 164, 0.6);
+  
 }
   .ulnav {
       list-style-type: none;
@@ -16,22 +20,26 @@
     }
     .linav {
       float: left;
+      margin-left: 10px;
     }
     .linav :hover:not(.active) {
-      background-color: rgb(126, 0, 0);
+      background-color: rgb(202, 12, 219);
      
     }
   .navitem{ 
       display: block;
-      color: rgb(240, 213, 78);
+      color: rgb(217, 241, 36);
       text-align: center;
       padding: 18px 19px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 15px;
+      font-size: 25px;
+      background-color: transparent;
+      -webkit-text-stroke: 1px rgb(169, 4, 4);
+      border-color: transparent;
     }
     .active {
-      background-color: #000000;
+      background-color: #730606;
       float: right;
     }
 

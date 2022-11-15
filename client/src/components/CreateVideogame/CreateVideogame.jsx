@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getGamesGenre, postVideogame, getPlatforms, getAllVideogames, cleanFilter } from '../../Redux/Actions';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import s from './create.module.css'
 import { Link } from "react-router-dom";
 
@@ -14,20 +14,20 @@ let pattern =/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.
 let reg_exImg = /.*(png|jpg|jpeg|gif)$/;
 
 if(!input.name) {
-    errors.name = 'name required'
+    errors.name = 'Name required'
 } else if(!/^[a-zA-Z0-9-() .]+$/.test(input.name)){
-    errors.name = 'Only letters, dash and parenthesis'
+    errors.name = 'Only letters, dashes and parenthesis'
 }
 if(input.image.length !== 0 && !/^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/.test(input.image)){
-    errors.image='invalid URL'
+    errors.image='Invalid URL'
 }
 if(!input.description) {
-    errors.description = 'description required'
+    errors.description = 'Description required'
 } else if (input.description.length > 300) {
     errors.description = 'Description too long. (Max = 100 caracteres)'
 }
 if(!input.released) {
-    errors.released = 'date required'
+    errors.released = 'Date required'
 }
 if(!input.rating) {
     errors.rating = 'Rating required'
@@ -42,19 +42,25 @@ if(!input.rating) {
         errors.image = 'Link needs to end with jpeg, jpg, png, gif or bmp'
     }
 }
+else if(!input.genres){errors.genres= 'Add your game genre(s) , please!'
+}else if(!input.platforms){
+    errors.platforms='Add at least one Platform'
+}
 return errors 
 }
 
 
 
 const  Create= ()=> {
+   
     const dispatch = useDispatch();
     const history = useHistory();
     
     const [errors, setErrors] = useState({}); 
 
     const videogames = useSelector(state => state.videogames)
-    const platforms = useSelector((state) => state.platforms.sort((a, b) => {
+
+    let platforms = useSelector((state) => state.platforms.sort((a, b) => {
         if (a > b) {
             return 1;
             }
@@ -88,9 +94,9 @@ platforms:[]
 });
 
 useEffect(() => {
-    dispatch(getGamesGenre());
-    dispatch(getPlatforms());
     dispatch(getAllVideogames());
+    dispatch(getGamesGenre())
+    dispatch(getPlatforms());
     if(validate(input)){
         setErrors(validate(input))
     }
@@ -100,18 +106,26 @@ useEffect(() => {
     }, [dispatch, input])
 
 
+
 // Handlers
         const handleChange=(e)=> {
-        e.preventDefault();
         setInput({
-            ...input,
-            [e.target.name]: e.target.value,
+                ...input,
+                [e.target.name]: e.target.value,
         });
-        };
+            setErrors(
+                validate({
+                    ...input,
+                    [e.target.name]: e.target.value,
+                })
+        );
+        console.log(errors.genre);
+        console.log(input);
+    };
+        
 
 
-        const handleGenres=(e)=> {
-            e.preventDefault();
+        const handleSelectGenres=(e)=> {
             if (!input.genres.includes(e.target.value)) {
             setInput({
                 ...input,
@@ -128,42 +142,45 @@ useEffect(() => {
 
         const handleDeleteGenre=(e)=> {
             e.preventDefault();
-        setInput({
-        ...input,
-        genres: input.genres.filter((gen) => gen !== e.target.value)
+            setInput({
+            ...input,
+            genres: input.genres.filter((gen) => gen !== e.target.value)
         });
-        setErrors(validate({
+        setErrors(
+            validate({
             ...input,
             [e.target.name]: [e.target.value],
-        }))
+        })
+        )
+        const newInput = input;
+        setErrors(validate(newInput));
+    
+        console.log(errors);
+        console.log(errors.genres);
         }
 
         const handleSelectPlatforms=(e)=> {
-            e.preventDefault();
             if (!input.platforms.includes(e.target.value)) {
                 setInput({
                 ...input,
                 platforms: [...input.platforms, e.target.value],
                 });
-                setErrors(
-                validate({
-                    ...input,
-                    platforms: [...input.platforms, e.target.value],
-                })
-                );
-            }
+                // setErrors(
+                // validate({
+                //     ...input,
+                //     platforms: [...input.platforms, e.target.value],
+                // })
+                // );
+            } else{console.log("Platform already chosen")}
             }
 
         const handleDeletePlatform=(e)=> {
-            e.preventDefault();
             let platformFilter= input.platforms.filter((p)=> p !== e.target.value)
         setInput({
         ...input,
         platforms: platformFilter,
         });
         };
-
-      
 
 
         const handleSubmit=(e)=> {
@@ -183,7 +200,7 @@ useEffect(() => {
         image: "",
         description: "",
         released: "",
-        rating: "",
+        rating: 0,
         genres: [],
         platforms: [],
         });
@@ -196,9 +213,10 @@ useEffect(() => {
 
 return (
 <div className={s.body} >
-<form onSubmit={(e) => handleSubmit(e)} className={s.box_form}>
+<form id='form'  className={s.box_form} 
+    onSubmit={(e) => handleSubmit(e)}>
     <div className={s.form}>
-        <h2 className={s.titulo}>CREATE YOUR VIDEO AND WIN THE GAME!</h2>
+        <h2 className={s.titulo}>CREATE YOUR OWN VIDEO AND WIN THE GAME!</h2>
 
 {/* NAME */}
         <div className={s.grupo}>
@@ -207,6 +225,7 @@ return (
             type='text'
             required
             name='name'
+            placeholder="Name..."
             value={input.name}
             onChange={(e) => handleChange(e)}
             /> <span className={s.barra}></span>
@@ -224,6 +243,7 @@ return (
             type='text'
             name='image'
             value={input.image}
+            placehokder= "Enter image url"
             onChange={(e) => handleChange(e)}
             /> <span className={s.barra}></span>
         {errors.image && (
@@ -265,18 +285,18 @@ return (
         </div>
 
 {/* DESCRIPTION */}
+
 <div className={s.grupo}>
 <label className={s.description}>Description: </label>
 <input
-className={s.textarea}
+    className={s.textarea}
     required
     type='text'
     name='description'
     value={input.description}
     placeholder={`Description required. 255 characters max...`}
     onChange={(e) => handleChange(e)}
-    > 
-    </input>
+    ></input>
 {errors.description && (
     <p className={s.danger}>{errors.description}</p>
 )}
@@ -285,65 +305,66 @@ className={s.textarea}
 {/* GENRES */}
 
 <div className={s.grupo}>
-        <select className={s.select_create}
-            id="genres" 
-            defaultValue="" 
-            onChange={(e) => handleGenres(e)}>
-            <option className={s.option_create} value='' disabled hidden>Choose some genres...</option>
-            {genres.map((g) => {
-            return (
-                <option className={s.option_create} key={g.id} value={g.name}>{g.name}</option>
-                );
-            })}
-        </select> 
-            <span className={s.barra}></span>
-            <label className={s.label}>Genres: </label>
-            {input.genres.map((g) => (
-            <div className={s.box_opcion}>
-            <div className={s.opcion_title}>{g}</div>
-                <button className={s.btn_remove} 
-                onClick={() => handleDeleteGenre(g)} 
-                key={g} 
-                value={g}>
-                <span className={s.x}>X</span></button>
-            </div>
-    ))}
+       
+
+<label className={s.label}>
+
+    <strong>Genres:</strong>{" "}
+    </label>
+    <label  className={s.option_create} > Choose some Genres </label>
+
+    <select className={s.select_create} onChange={handleSelectGenres}>
+        {genres.map((e) => (
+        <option className={s.option_create} key={e.name} value={e.name}> {e.name} </option>
+        ))} {" "}
+    </select>
+    
+    {input.genres.map((el) => (
+        <div>
+            <span className={s.spanx}>{el}</span>{" "}
+        <button
+            className={s.btn_remove}
+            value={el}
+            onClick={(el) => handleDeleteGenre(el)}
+        >X</button>
         </div>
-
-
+    ))}
+    </div>
 
 
 {/* PLATFORMS */}
 
-<div >
-        <div id="platforms" className={s.grupo}>
-            <label className={s.platformTitle}><strong>Platforms: </strong>{" "}</label>
-            <span className={s.barra}></span>
-            <select className={s.select_create} onChange={handleSelectPlatforms}>
-            {" "}
-            {platforms.map((e) => (
-                <option className={s.option_create} value={e}> {e} </option>
-                ))}{" "}
-            </select>
-        </div>
+<div className={s.grupo} >
 
-        
-        {input.platforms.map((el) => (
-        <div className={s.box_opcion}>
-            <p> {el}</p>{" "}
-            <button
+    <label  className={s.label} >
+        <strong>Platforms:</strong>{" "}
+    </label>
+    <label  className={s.option_create} > Choose some Platforms </label>
+
+    <select className={s.select_create} onChange={handleSelectPlatforms}>
+    
+    {platforms.map((p) => (
+        <option  className={s.option_create} key={p} value={p}> {p} </option>
+    ))}{" "}
+    </select>
+
+    {input.platforms.map((el) => (
+    <div>
+    <span className={s.spanx}>{el}</span>{" "}
+    <button
             name="platforms"
             value={el}
-            key={el}
             className={s.btn_remove}
-            onClick={(el) => handleDeletePlatform(el)}>
-            <span className={s.x}>X</span>
-            </button>
-        </div>
-        ))}
-        <br />
-        </div>
+            onClick={(el) => handleDeletePlatform(el)}
+            >X</button>
     </div>
+          ))}
+            <br />
+            </div>
+
+    </div>
+
+
     <div>
         <button type="submit" className={s.btn_submit}>CREATE VIDEOGAME</button>
     </div>

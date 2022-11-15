@@ -8,26 +8,50 @@ const { API_KEY } = process.env;
 
 const router = Router()
 
-router.get('/', async (req, res, next)=>{
+// router.get('/', async(req, res)=>{
+//     const {name}= req.query;
+//     try {
+//         const allInfo= await getAllVideogames();
+//         if(name){
+//             let videogame= allInfo.filter(v=> v.name.toLowerCase().includes(name.toLowerCase())).slice(0,16);
+//             videogame,this.length
+//             ? res.status(200).send(videogame)
+//             : res.status(400).send("Videogame not found")
+//         }else{
+//             res.status(200).send(allInfo)
+//         }
+//     } catch (error) {
+//         console.log(error.message)
+//     }}
+// )
+
+router.get('/', async (req, res)=>{
+    const {name} = req.query
+
     try {
-        const {name} = req.query
-        let juegos= await getAllVideogames()
+        let allGames= await getAllVideogames()
         if(name){
-            let juegosName= juegos.filter(e => e.name.toLowerCase().includes(name.toLowerCase())).slice(0, 15)
-            if(juegosName.length)  
-            res.send(juegosName)
-            else  res.status(404).send('Videogame not found')
+            let juegosName=  allGames.filter(e => e.name.toLowerCase().includes(name.toLowerCase()))
+            juegosName.length
+            ?res.status(200).send(juegosName)
+            :res.status(404).send('Videogame not found')
         }else{
-            let todos= juegos.map(e=>{
-                return{
-                    id: e.id,
-                    name: e.name,
-                    genres: e.genres,
-                    image: e.image,
-                    rating: e.rating
-                }
-            })
-            res.send(todos)
+            // let todos= allGames.map(e=>{
+            //     return{
+            //         id: e.id,
+            //         name: e.name,
+            //         genres: e.genres,
+            //         image: e.image,
+            //         rating: e.rating,
+            //         released: e.released,
+            //         description: e.description,
+            //         platforms: e.platforms.map(p=>p.platforms),
+            //         genres: e.genres.map(genre=> genre),
+            //         createdInDb: e.createdInDb? true: false
+            //     }
+            // })
+            // res.send(todos)
+            res.status(200).send(allGames)
         }
     } catch (error) {
         console.log(error.message)
@@ -35,9 +59,40 @@ router.get('/', async (req, res, next)=>{
 })
 
 
+router.post('/', async (req, res)=>{
+    let {name, description, image, released, rating, platforms, genres} = req.body;
+    try {
+        if(!name || ! description || !platforms || !genres) res.status(400).send({msg: 'Missing required fields'});
+        
+        const videoDb = await Videogame.findAll({ where: { name: name } });
+        if (videoDb.length != 0) {
+        return res.send("Name already exists");}
+        
+        const newVideogame = await Videogame.create({
+            name,
+            description,
+            released,
+            rating,
+            platforms,
+            image,
+            createdInDb: true
+        });
+        // console.log(newVideogame)
+
+        const genresDb= await Genre.findAll({
+            where:{name:genres}
+        })
+        // console.log(genresDb)
+        await newVideogame.addGenre(genresDb)
+        return res.status(200).send('Videogame created')
+
+} catch (error) { 
+    console.log(error.message)
+}
+});
 
 router.get('/:id', async (req, res)=>{
-    let id = req.params.id;
+    let{ id }= req.params;
     const videogames = await searchVideogamesByID(id);
     if (videogames) res.status(200).json(videogames);
     else res.status(404).send({msg: 'Videogame not found'});
@@ -45,73 +100,6 @@ router.get('/:id', async (req, res)=>{
 
 
 
-router.post('/', async (req, res)=>{
-    let {name, description, image, released, rating, platforms, genres, createdInDb} = req.body;
-    try {
-        if(!name || ! description || !platforms || !genres) res.status(400).send({msg: 'missing fields'});
-        
-        const videoDb = await Videogame.findAll({ where: { name: name } });
-        if (videoDb.length != 0) {
-        return res.send("Name already exists");}
-
-        
-        const newVideogame = await Videogame.create({
-            name,
-            description,
-            released,
-            rating,
-            platforms:platforms,
-            image,
-            createdInDb: true
-        });
-        console.log(newVideogame)
-        const genreDB= await Genre.findAll({
-            where:{
-                name: genres
-            }
-        })
-        newVideogame.addGenre(genreDB)
-        res.status(200).send('Videogame created')
-
-} catch (error) { 
-    console.log(error.message)
-}
-});
-
-
-
-router.get('/:id', async (req, res) =>{
-    const {id} = req.params;
-    try{
-  if(!id.includes('-')){
-        let getAllGames = await getAllVideogames(); 
-    
-        let oneGame = getAllGames.filter(e => e.id === parseInt(id));
-    
-        if(oneGame.length > 0){
-            const detalle = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-            const description = detalle.data.description_raw;
-            oneGame[0]['description'] = description;
-            res.status(200).send(oneGame)
-        }
-    }else {
-        let theGame = await Videogame.findByPk(id, {
-            include: [{
-                model: Genre,
-                attributes: ['name'],
-                through : {
-                    attributes: [],
-                }
-            }]
-        })
-        var arreglo = []
-        arreglo.push(theGame)
-        res.status(200).json(arreglo)
-    }
-    }catch(error){
-        res.status(404).send(error)
-    }
-    })
 
 router.delete('/:id', async (req,res,next)=>{
     const {id} = req.params

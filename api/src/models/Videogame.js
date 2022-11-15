@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
       // validate:{ //only text
       //   is:/^[a-z]+$/i
       // },
@@ -32,17 +32,17 @@ module.exports = (sequelize) => {
     rating: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      // validate:{
-      //   isNumeric:true,
-      //   min: {
-      //     args: 1, 
-      //     msg: "The rating must be between 1 to 5"
-      // },
-      // max: {
-      //     args: 5,
-      //     msg: "The rating must be between 1 to 5"
-      // },
-      // },
+    //   validate:{
+    //     isNumeric:true,
+    //     min: {
+    //       args: 1, 
+    //       msg: "The rating must be between 0 to 5"
+    //   },
+    //   max: {
+    //       args: 5,
+    //       msg: "The rating must be between 0 to 5"
+    //   },
+    //   },
     },
     
     platforms: {

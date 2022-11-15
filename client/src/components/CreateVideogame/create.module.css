@@ -77,9 +77,11 @@ background-size: cover;
     outline: none;
     color: black;
     font-family: monospace;
-    font-size: 0.875em;
-    border: solid 2px #49454567;
+    font-size: 1.2em;
+    border: solid 5px #76040467;
+    border-style: groove;
 }
+
 
 .label {
     color: rgb(144, 5, 5);
@@ -104,13 +106,7 @@ background-size: cover;
     pointer-events: none;
 }
 
-textarea:focus~.label,
-textarea:valid~.label{
-    top: -30px;
-    font-size: 18px;
-    color: black;
-    
-}
+
 
 .barra{
     /* position:relative; */
@@ -177,8 +173,9 @@ padding: 30px;
 .danger {
     color: #d90429;
     line-height: 0px;
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 10px;
+    font-weight: bold;
 }
 
 .box_opcion {
@@ -197,7 +194,8 @@ font-size: 12px;
 }
 
 .btn_remove {
-display: inline-block;
+display: flex;
+flex-direction: column;
 width: 30px;
 text-align: center;
 padding: 0;
@@ -207,6 +205,10 @@ background: #a4133c;
 
 .x {
     color: white;
+}
+.spanx{
+    display:flex;
+    flex-direction: row;
 }
 
 .box_home {

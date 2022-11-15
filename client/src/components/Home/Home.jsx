@@ -19,6 +19,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const videogames = useSelector((state) => state.videogames);
   const filteredGames = useSelector((state) => state.filteredGames);
+
   const [posts, setPosts] = useState(videogames);
   const orderBy = useSelector((state) => state.orderedBy);
   const filteredBy = useSelector((state) => state.filteredBy);
@@ -61,6 +62,8 @@ const Home = () => {
             <div key={game.id}>
               <Link to={`/videogame/${game.id}`} className={s.linkcard}>
                 <Card
+                  key={game.id}
+                  id={game.id}
                   image={game.image}
                   name={game.name}
                   rating={game.rating}

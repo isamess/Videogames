@@ -10,9 +10,7 @@ const LandingPage = () => {
 
             <h1>  Welcome to the <br/> Marvellous<br/>Videogame's World</h1>
             <Link to='/home'>
-            <span> 
-            <button className={s.boton}>Home</button>
-            </span>
+            <span><button className={s.boton}>Home</button></span>
             </Link>
         </div>
 

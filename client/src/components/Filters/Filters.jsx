@@ -28,24 +28,30 @@ const Filters = () => {
      <div className={s.container}>
       <div className={s.box}>
         <select  onChange={handleChange}> Orders
-          <option>Order by...</option>
-          <option value="ALL">All Games</option>
-          <option value="A-Z">A to Z</option>
-          <option value="Z-A">Z to A</option>
-          <option value="ASC"> Higher Ratings</option>
-          <option value="DESC">Lower Ratings</option>
-          <option value="API">API Games</option>
-          <option value="DB">Created Games</option>
+          <option key="order">Order by...</option>
+          <option key="all" value="ALL">All Games</option>
+          <option key="az" value="A-Z">A to Z</option>
+          <option key="za" value="Z-A">Z to A</option> 
+          <option key="asc"value="ASC"> Higher Ratings</option>
+          <option key="dsc" value="DESC">Lower Ratings</option>
+         
+        
         </select>
       </div>
       <div className={s.box}>
+        <select name="apiGames" onChange={handleChange}>
+          <option key="api" value="API">API Games</option>
+        </select>
+        <select name="DbGames" onChange={handleChange}>
+          <option key="db" value="DB">Created Games</option>
+        </select>
         <select  name="filters" onChange={handleGenres}>
-          <option >
-            Filter by...
+          <option  key="filter" >
+            Genres...
           </option>
-          <option value="ALL">All</option>
+          <option  key="allgames" value="ALL">All</option>
           {genres && genres.map((g) => (
-            <option value={g.name}>{g.name}</option>
+            <option   value={g.name}>{g.name}</option>
           ))}
         </select>
       </div>
