@@ -13,8 +13,10 @@ GET_DETAIL_ID,
 CLEAN_DETAIL,
 GET_PLATFORMS,
 CREATE_VIDEOGAME,
-GET_VIDEOGAMES,
+// GET_VIDEOGAMES,
 GET_BY_ID,
+GET_DB,
+GET_API,
 FILTRO_POR_TRES
 } from './Actions/index'
 
@@ -52,15 +54,31 @@ switch (action.type) {
         
         case GET_BY_ID:
             return {
-              ...state,
-              videogameDetail: action.payload,
+                ...state,
+                videogameDetail: action.payload,
             };
+
+            case GET_API:
+        return {
+            ...state,
+            videogames: action.payload,
+            videogame: action.payload
+        };
+
+            case GET_DB:
+                return{
+                    ...state,
+                    videogame: action.payload,
+                    videogames: action.payload, 
+                    createdVideogame: action.payload
+                };
 
     case POST_VIDEOGAME:
     return {
         ...state,
-        videogame: [...state.videogame.concat(action.payload)]
+        // videogame: [...state.videogame.concat(action.payload)]
     };
+
     case GET_ALL_VIDEOGAMES:
     return {
         ...state,
@@ -68,12 +86,12 @@ switch (action.type) {
         filteredGames: action.payload,
         videogame: action.payload
     };
-    case GET_VIDEOGAMES: {
-        return {
-            ...state,
-            videogames: action.payload
-        }
-    }
+    // case GET_VIDEOGAMES: {
+    //     return {
+    //         ...state,
+    //         videogames: action.payload
+    //     }
+    // }
     case GET_BY_NAME:
         return{
             ...state,
@@ -111,22 +129,25 @@ switch (action.type) {
                 videogameDetail: action.payload,
                 videogames: action.payload,
             };
+
     case FILTER_GENRES:
     if(action.payload === "ALL"){
         return {
         ...state,
         filteredGames: state.videogames,
         filteredBy: action.payload,
-        };}else { 
+        };
+    }else { 
     return {
         ...state,
         filteredGames: state.videogames.filter((r) =>
         r.genres.includes(action.payload)
         ),
-
         filteredBy: action.payload,
-    }
+    };
 }
+
+
 
 case ORDER_GAMES:
     switch(action.payload){
@@ -155,6 +176,8 @@ case ORDER_GAMES:
         default:
             return state.videogames;
     }
+
+
 case FILTRO_POR_TRES:
     return{
         ...state,
@@ -178,16 +201,15 @@ case FILTRO_POR_TRES:
             filteredGames: [...state.filteredGames].sort((a, b) =>
             a.name < b.name ? 1 : b.name < a.name ? -1 : 0
             ),
-
             orderedBy: action.payload,
         };
+
         case "ASC":
         return {
             ...state,
             filteredGames: [...state.filteredGames].sort((a, b) =>
             a.rating < b.rating ? 1 : b.rating < a.rating ? -1 : 0
             ),
-
             orderedBy: action.payload,
         };
         case "DESC":
@@ -199,22 +221,22 @@ case FILTRO_POR_TRES:
 
             orderedBy: action.payload,
         };
-        // case "API":
-        // return {
-        //     ...state,
-        //     filteredGames: [...state.videogames].filter(
-        //     (r) => typeof r.id === "number"
-        //     ),
-        //     orderedBy: action.payload,
-        // };
-        // case "DB":
-        // return {
-        //     ...state,
-        //     filteredGames: [...state.videogames].filter(
-        //     (r) => typeof r.id !== "number"
-        //     ),
-        //     orderedBy: action.payload,
-        // };
+        case "API":
+        return {
+            ...state,
+            filteredGames: [...state.videogames].filter(
+            (r) => typeof r.id === "number"
+            ),
+            orderedBy: action.payload,
+        };
+        case "DB":
+        return {
+            ...state,
+            filteredGames: [...state.videogames].filter(
+            (r) => typeof r.id !== "number"
+            ),
+            orderedBy: action.payload,
+        };
         case "ALL":
         return {
             ...state,

@@ -1,22 +1,26 @@
 .searchbar {
 border: solid transparent;
 border-radius: 3px;
+border:1px solid #a30303;
 padding: 0.5em;
 background: rgb(248, 249, 182) 25%;
 color: rgb(0, 0, 0);
 margin-right: 0.5em;
 width: 20vw;
 margin-top: 12px;
-
+box-shadow: -3px 4px 6px 0px #899599;
 }
 .button {
 border: solid transparent;
-border-radius: 3px;
+border-radius: 3px 15px 15px 3px;
+border:1px solid #a30303;
 padding: 0.5em;
 background: rgb(240, 213, 78);
 color: rgb(107, 4, 4);
 transition: .3s;
 font-weight: bold;
+font-family:Georgia, 'Times New Roman', Times, serif;
+box-shadow: -3px 4px 6px 0px #899599;
 }
 .button:hover {
 background: rgb(137, 22, 22) 25%;

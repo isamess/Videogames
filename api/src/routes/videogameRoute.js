@@ -1,29 +1,13 @@
 const {Router} = require('express')
 const axios = require('axios');
 const {Videogame, Genre} = require('../db')
-const {getAllVideogames, searchVideogamesByID } = require('../controllers');
+const {getAllVideogames, searchVideogamesByID, getVideogamesFromDb, getVideogamesFromApi  } = require('../controllers');
 const { API_KEY } = process.env;
 
 
 
 const router = Router()
 
-// router.get('/', async(req, res)=>{
-//     const {name}= req.query;
-//     try {
-//         const allInfo= await getAllVideogames();
-//         if(name){
-//             let videogame= allInfo.filter(v=> v.name.toLowerCase().includes(name.toLowerCase())).slice(0,16);
-//             videogame,this.length
-//             ? res.status(200).send(videogame)
-//             : res.status(400).send("Videogame not found")
-//         }else{
-//             res.status(200).send(allInfo)
-//         }
-//     } catch (error) {
-//         console.log(error.message)
-//     }}
-// )
 
 router.get('/', async (req, res)=>{
     const {name} = req.query
@@ -80,7 +64,7 @@ router.post('/', async (req, res)=>{
         // console.log(newVideogame)
 
         const genresDb= await Genre.findAll({
-            where:{name:genres}
+            where:{name: genres}
         })
         // console.log(genresDb)
         await newVideogame.addGenre(genresDb)
@@ -89,6 +73,21 @@ router.post('/', async (req, res)=>{
 } catch (error) { 
     console.log(error.message)
 }
+});
+
+
+router.get('/database', async(req, res)=>{
+    try {
+        const videoDb= await getVideogamesFromDb();
+        res.send(videoDb);
+    } catch (error) {
+        console.log(error.message)
+    }
+});
+
+router.get('/Api', async(req, res)=>{
+    const videoApi= await getVideogamesFromApi();
+    res.send(videoApi)
 });
 
 router.get('/:id', async (req, res)=>{
@@ -121,42 +120,6 @@ router.delete('/:id', async (req,res,next)=>{
        console.log(error.message)
    }
 })
-
-// router.put('/:id', async (req, res, next)=>{
-//     const {id} = req.params
-//     const {name, description, rating, released, platform} = req.body
-//     try {
-//         let updateVideo= await Videogame.findOne({
-//             where:{
-//                 id: id,
-//             },
-//             include:{
-//                 model: Genre,
-//                 attributes: ['name'],
-//                 through: {
-//                     attributes:[]
-//                 }}
-//         });
-//         await updateVideo.update({
-//             name,
-//             description,
-//             rating,
-//             released,
-//             platform
-//         });
-//         let genDb= await Genre.findAll({
-//             where:{
-//                 name:{
-//                     [Op.in]: req.body.genres,
-//                 },
-//             },
-//         });
-//         await updateVideo.setGenres(genDb);
-//         res.send(updateVideo)
-//     } catch (error) {
-//         next(error)
-//     }    
-// })
 
 
 

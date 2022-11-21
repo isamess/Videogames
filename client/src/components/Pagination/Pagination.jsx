@@ -4,12 +4,15 @@ import s from './pagination.module.css';
 
 const Pagination = ({ postsPerPage, totalPosts, setCurrentPage }) => {
     const page=[];
+
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
         page.push(i); 
     }
+
     function paginate(number) {
     setCurrentPage(number);
     }
+
 return (
 <React.Fragment>
 <nav className={s.nav}>
@@ -20,7 +23,7 @@ return (
     </div>
 </nav>
 </React.Fragment>
-)
+);
 }
 
 export default Pagination

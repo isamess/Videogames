@@ -8,6 +8,7 @@ import s from './home.module.css';
 import Pagination from '../Pagination/Pagination.jsx';
 import Filters from '../Filters/Filters.jsx'
 import NavBar from '../NavBar/NavBar';
+import Loading from '../Loading/Loading';
 // import Loading from '../Loading/Loading'
 
 const Home = () => {
@@ -27,6 +28,8 @@ const Home = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = currentpage => setCurrentPage(currentpage);
 
   useEffect(() => {
     if (!videogames.length) {
@@ -56,23 +59,39 @@ const Home = () => {
           postsPerPage={postsPerPage}
           totalPosts={posts.length}
           setCurrentPage={setCurrentPage}
+          paginate={paginate}
         />
-        <div className={s.container}>
-          {currentPosts.map((game) => (
-            <div key={game.id}>
-              <Link to={`/videogame/${game.id}`} className={s.linkcard}>
-                <Card
-                  key={game.id}
-                  id={game.id}
-                  image={game.image}
-                  name={game.name}
-                  rating={game.rating}
-                  genres={game.genres}
-                />
-              </Link>
-            </div>
-          ))}
-        </div>
+
+        {
+          currentPosts.length > 0 ?
+          (
+            <div className={s.container}>
+            {currentPosts.map((game) => (
+              <div key={game.id}>
+                <Link to={`/videogame/${game.id}`} className={s.linkcard}>
+                  <Card
+                    key={game.id}
+                    id={game.id}
+                    image={game.image}
+                    name={game.name}
+                    rating={game.rating}
+                    genres={game.genres}
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          ):(<div> <Loading/></div>)
+        }
+
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          setCurrentPage={setCurrentPage}
+        />
+
+
       </div>
     </React.Fragment>
   )}

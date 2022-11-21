@@ -25,36 +25,40 @@ const Filters = () => {
 
   return (
   <React.Fragment>
-     <div className={s.container}>
-      <div className={s.box}>
-        <select  onChange={handleChange}> Orders
-          <option key="order">Order by...</option>
+     <div className={s.selectContainer}>
+      
+        <div className={s.select} >  
+        <select name="orders"  onChange={handleChange}>
+          <option disabled>Orders</option>
           <option key="all" value="ALL">All Games</option>
           <option key="az" value="A-Z">A to Z</option>
           <option key="za" value="Z-A">Z to A</option> 
           <option key="asc"value="ASC"> Higher Ratings</option>
           <option key="dsc" value="DESC">Lower Ratings</option>
-         
-        
         </select>
-      </div>
-      <div className={s.box}>
+        </div>
+
+        <div className={s.select}>
         <select name="apiGames" onChange={handleChange}>
+        <option key="origin" disabled>Origin</option>
           <option key="api" value="API">API Games</option>
-        </select>
-        <select name="DbGames" onChange={handleChange}>
           <option key="db" value="DB">Created Games</option>
         </select>
+        
+        </div>
+
+      <div className={s.select}>
         <select  name="filters" onChange={handleGenres}>
-          <option  key="filter" >
+          <option disabled  key="filter" >
             Genres...
           </option>
-          <option  key="allgames" value="ALL">All</option>
+          <option  key="allgames" value="ALL">All Genres</option>
           {genres && genres.map((g) => (
-            <option   value={g.name}>{g.name}</option>
+            <option key={g.name}   value={g.name}>{g.name}</option>
           ))}
         </select>
       </div>
+
     </div>
   </React.Fragment>
   )

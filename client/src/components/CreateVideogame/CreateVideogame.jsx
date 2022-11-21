@@ -39,7 +39,7 @@ if(!input.rating) {
     errors.image = 'You may add a link'
 }else if (!pattern.test(input.image)) {
     if (!reg_exImg.test(input.image)){
-        errors.image = 'Link needs to end with jpeg, jpg, png, gif or bmp'
+        errors.image = 'Link needs to finish with jpeg, jpg, png, gif or bmp'
     }
 }
 else if(!input.genres){errors.genres= 'Add your game genre(s) , please!'
@@ -90,7 +90,8 @@ released: "",
 rating: "",
 image: "",
 genres: [],
-platforms:[]
+platforms:[],
+createdInDb: true,
 });
 
 useEffect(() => {
@@ -108,107 +109,108 @@ useEffect(() => {
 
 
 // Handlers
-        const handleChange=(e)=> {
-        setInput({
-                ...input,
-                [e.target.name]: e.target.value,
-        });
-            setErrors(
-                validate({
-                    ...input,
-                    [e.target.name]: e.target.value,
-                })
-        );
-        console.log(errors.genre);
-        console.log(input);
-    };
-        
 
-
-        const handleSelectGenres=(e)=> {
-            if (!input.genres.includes(e.target.value)) {
-            setInput({
-                ...input,
-                genres: [...input.genres, e.target.value],
-            });
-            setErrors(
-                validate({
-                ...input,
-                genres: [...input.genres, e.target.value],
-                })
-            );
-            }
-        }
-
-        const handleDeleteGenre=(e)=> {
-            e.preventDefault();
-            setInput({
+const handleChange=(e)=> {
+setInput({
+        ...input,
+        [e.target.name]: e.target.value,
+});
+    setErrors(
+        validate({
             ...input,
-            genres: input.genres.filter((gen) => gen !== e.target.value)
-        });
-        setErrors(
-            validate({
-            ...input,
-            [e.target.name]: [e.target.value],
+            [e.target.name]: e.target.value,
         })
-        )
-        const newInput = input;
-        setErrors(validate(newInput));
-    
-        console.log(errors);
-        console.log(errors.genres);
-        }
+);
+console.log(errors.genre);
+console.log(input);
+};
 
-        const handleSelectPlatforms=(e)=> {
-            if (!input.platforms.includes(e.target.value)) {
-                setInput({
-                ...input,
-                platforms: [...input.platforms, e.target.value],
-                });
-                // setErrors(
-                // validate({
-                //     ...input,
-                //     platforms: [...input.platforms, e.target.value],
-                // })
-                // );
-            } else{console.log("Platform already chosen")}
-            }
 
-        const handleDeletePlatform=(e)=> {
-            let platformFilter= input.platforms.filter((p)=> p !== e.target.value)
+
+const handleSelectGenres=(e)=> {
+    if (!input.genres.includes(e.target.value)) {
+    setInput({
+        ...input,
+        genres: [...input.genres, e.target.value],
+    });
+    setErrors(
+        validate({
+        ...input,
+        genres: [...input.genres, e.target.value],
+        })
+    );
+    }
+}
+
+const handleDeleteGenre=(e)=> {
+    e.preventDefault();
+    setInput({
+    ...input,
+    genres: input.genres.filter((gen) => gen !== e.target.value)
+});
+setErrors(
+    validate({
+    ...input,
+    [e.target.name]: [e.target.value],
+})
+)
+const newInput = input;
+setErrors(validate(newInput));
+
+console.log(errors);
+console.log(errors.genres);
+}
+
+const handleSelectPlatforms=(e)=> {
+    if (!input.platforms.includes(e.target.value)) {
         setInput({
         ...input,
-        platforms: platformFilter,
+        platforms: [...input.platforms, e.target.value],
         });
-        };
+        // setErrors(
+        // validate({
+        //     ...input,
+        //     platforms: [...input.platforms, e.target.value],
+        // })
+        // );
+    } else{console.log("Platform already chosen")}
+    }
+
+const handleDeletePlatform=(e)=> {
+    let platformFilter= input.platforms.filter((p)=> p !== e.target.value)
+setInput({
+...input,
+platforms: platformFilter,
+});
+};
 
 
-        const handleSubmit=(e)=> {
-        e.preventDefault();
-        let noRepeat = videogames.filter(n => n.name === input.name)
-        if(noRepeat.length !== 0) {
-        alert('That name already exists')
-        } else {
-        let error = Object.keys(validate(input)) // Object.keys(errors) --> errors = {} => devuelve un array de strings q representa todas las propiedades del objeto solo habra props si  HAY ALGUN ERROR
-        if(error.length !== 0 || !input.genres.length || !input.platforms.length) { //si hay error, va a ser un array con la prop del error
-        alert('Fill all the fields correctly, please')
-        return
-        } else {
-        dispatch(postVideogame(input));
-        setInput({
-        name: "",
-        image: "",
-        description: "",
-        released: "",
-        rating: 0,
-        genres: [],
-        platforms: [],
-        });
-        alert(`The game "${input.name}" has been created succesfully!`);
-        }
-        history.push('/home')
-        }
-        };
+const handleSubmit=(e)=> {
+e.preventDefault();
+let noRepeat = videogames.filter(n => n.name === input.name)
+if(noRepeat.length !== 0) {
+alert('That name already exists')
+} else {
+let error = Object.keys(validate(input)) // Object.keys(errors) --> errors = {} => devuelve un array de strings q representa todas las propiedades del objeto solo habra props si  HAY ALGUN ERROR
+if(error.length !== 0 || !input.genres.length || !input.platforms.length) { //si hay error, va a ser un array con la prop del error
+alert('Fill all the fields correctly, please')
+return
+} else {
+    dispatch(postVideogame(input));
+    setInput({
+    name: "",
+    image: "",
+    description: "",
+    released: "",
+    rating: 0,
+    genres: [],
+    platforms: [],
+    });
+    alert(`The game "${input.name}" has been created succesfully!`);
+    }
+    history.push('/home')
+    }
+    };
 
 
 return (
@@ -220,6 +222,7 @@ return (
 
 {/* NAME */}
         <div className={s.grupo}>
+        <label className={s.label}>Name: </label>
         <input
             className={s.create_input}
             type='text'
@@ -228,8 +231,9 @@ return (
             placeholder="Name..."
             value={input.name}
             onChange={(e) => handleChange(e)}
-            /> <span className={s.barra}></span>
-        <label className={s.label}>Name: </label>
+            />
+            {/* <span className={s.barra}></span> */}
+       
         {errors.name && (
             <p className={s.danger}>{errors.name}</p>
         )}
@@ -237,15 +241,16 @@ return (
 
 {/* IMAGE */}
         <div className={s.grupo}>
-        <label className={s.label}>Image URL: </label>
+            <label className={s.label}>Image URL: </label>
         <input
-        className={s.create_input}
+            className={s.create_input}
             type='text'
             name='image'
             value={input.image}
             placehokder= "Enter image url"
             onChange={(e) => handleChange(e)}
-            /> <span className={s.barra}></span>
+            /> 
+            {/* <span className={s.barra}></span> */}
         {errors.image && (
             <p className={s.danger}>{errors.image}</p>
         )}
@@ -253,16 +258,17 @@ return (
 
 {/* RELEASE */}
         <div className={s.grupo}>
-        <label className={s.label}>Release: </label>
+        <label className={s.label}>Release: </label><br/>
         <input
-        className={s.create_input}
+            className={s.create_input}
             required
             type='date'
             name="released"
             value={input.released}
             placeholder='yyyy-mm-dd'
             onChange={(e) => handleChange(e)}
-            /> <span className={s.barra}></span>
+            /> 
+            {/* <span className={s.barra}></span> */}
         {errors.released && (
             <p className={s.danger}>{errors.released}</p>
         )}
@@ -272,13 +278,14 @@ return (
         <div className={s.grupo}>
         <label className={s.label}>Rating: </label>
         <input
-        className={s.create_input}
+            className={s.create_input}
             required
             type="number"
             name="rating"
             value={input.rating}
             onChange={(e) => handleChange(e)}
-            /> <span className={s.barra}></span>
+            /> 
+            {/* <span className={s.barra}></span> */}
         {errors.rating && (
             <p className={s.danger}>{errors.rating}</p>
         )}
@@ -294,9 +301,9 @@ return (
     type='text'
     name='description'
     value={input.description}
-    placeholder={`Description required. 255 characters max...`}
+    placeholder={`Description required. 100 characters max...`}
     onChange={(e) => handleChange(e)}
-    ></input>
+    />
 {errors.description && (
     <p className={s.danger}>{errors.description}</p>
 )}
@@ -305,11 +312,8 @@ return (
 {/* GENRES */}
 
 <div className={s.grupo}>
-       
-
-<label className={s.label}>
-
-    <strong>Genres:</strong>{" "}
+    <label className={s.label}>
+    Genres:{" "}
     </label>
     <label  className={s.option_create} > Choose some Genres </label>
 
@@ -337,7 +341,7 @@ return (
 <div className={s.grupo} >
 
     <label  className={s.label} >
-        <strong>Platforms:</strong>{" "}
+        Platforms:{" "}
     </label>
     <label  className={s.option_create} > Choose some Platforms </label>
 
@@ -364,7 +368,7 @@ return (
 
     </div>
 
-
+    <div className={s.buttons}>
     <div>
         <button type="submit" className={s.btn_submit}>CREATE VIDEOGAME</button>
     </div>
@@ -374,6 +378,10 @@ return (
         </Link>
         
     </div>
+
+    </div>
+
+
     </form>
 
 </div>

@@ -19,15 +19,13 @@ const getVideogamesFromApi= async()=>{
                     released: game.released,
                     rating: game.rating,
                     description: game.description,
-                    platforms: game.platforms?.map(el => el.platform.name).join().split(", "),
-                    // platforms: game.platforms.map((p) => p.platform.name),
+                    platforms: game.platforms?.map(el => el.platform.name).join().split(" - "),
                     genres: game.genres?.map(genre => genre.name),
                     createdInDb: false,
                 })
             });
         }
         return videogames;
-        
     } catch (error) {
         console.log(error.message)
     }
@@ -106,7 +104,6 @@ const getPlatforms = async () => {
 const searchVideogamesByID= async(id)=> {
     const dbVideogames = await getVideogamesFromDb();
     let videogame = dbVideogames.find(game => game.id === id);
-
     if (videogame) return videogame;
 
     //Si no lo encuentra lo buscamos en la api
@@ -143,7 +140,6 @@ const getGenres= async()=>{
             }
             
         })
-        
         apiGenres.forEach(g=> Genre.findOrCreate({
             where:{name: g}
         }))
@@ -153,8 +149,6 @@ const getGenres= async()=>{
         console.log(error.message)
     }
 };
-
-
 
 
 //get genres in Db
@@ -175,6 +169,8 @@ module.exports = {
     searchVideogamesInApi,
     searchVideogamesByID,
     getGenresFromDb,
+    getVideogamesFromDb,
+    getVideogamesFromApi,
     getGenres,
     getPlatforms,
     

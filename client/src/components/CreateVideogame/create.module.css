@@ -3,18 +3,24 @@
     background-image: url('../../assets/backgroundLegend2.jpg');
 background-repeat: no-repeat;
 background-size: cover;
+display:flex;
+flex-direction: column;
+align-items: center;
 }
 .titulo {
     text-align: center;
-    font-weight: 700;
+    font-weight: 300px;
+    font-size: 20px;
+    
     font-family: "Playfair Display SC";
     color: rgb(170, 5, 5);
 }
 
 .box_form {
-    background-color: rgba(159, 141, 4, 0.9);
-    padding: 45px 0;
-    border-radius: 10px;
+    background-color: rgba(159, 141, 4, 0.8);
+    padding: 20px 0;
+    border-top-left-radius: 90px;
+    border-bottom-right-radius: 90px;
     box-shadow: 
     0 0 5px rgb(255 240 243),
     0 0 10px rgb(255 204 213),
@@ -22,12 +28,14 @@ background-size: cover;
     0 0 20px rgb(255 143 163),
     0 0 25px rgb(255 117 143),
     0 0 30px rgb(255 77 109);
-    height: auto;
-    display: inline-block;
+    height: fit-content;
+    /* display: inline-block; */
     margin-top: 20px;
-    width: 60vw;
+    margin-bottom: 20px;
+    width: 40vw;
     max-width: 800px;
-
+    display:flex;
+    flex-direction: row;
 }
 
 .form {
@@ -45,7 +53,7 @@ background-size: cover;
 .create_input {
     background: none;
     color: #504e4e;
-    font-size: 18px;
+    font-size: 14px;
     padding: 4px 10px 10px 5px;
     display: block;
     width: 100%;
@@ -55,38 +63,39 @@ background-size: cover;
 
 .create_input:focus {
     outline: none;
-    color: #5e5d5d
+    color:#504e4e;
+    
 }
-
-
 
 .create_input:focus~.label,
 .create_input:valid~.label {
     top: -14px;
     font-size: 15px;
-    color: #495867;
+    color: #504e4e;
 }
 
 .textarea {
     width: 470px;
     max-width: 470px;
-    height: 110px;
+    height: 60px;
     max-height: 120px;
     padding: 10px;
-    background: rgb(225, 202, 202);
+    background: rgb(212, 184, 184);
     outline: none;
     color: black;
     font-family: monospace;
     font-size: 1.2em;
     border: solid 5px #76040467;
     border-style: groove;
+    
 }
 
 
 .label {
     color: rgb(144, 5, 5);
-    font-family: monospace;
-    font-size: 18px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 15px;
+    line-height: 1px;
     font-weight: bold;
     position: absolute;
     top: -5px;
@@ -96,7 +105,7 @@ background-size: cover;
 }
 .description { 
     color:  rgb(144, 5, 5);
-    font-family: monospace;
+    font-family:Georgia, 'Times New Roman', Times, serif;
     font-size: 18px;
     font-weight: bold;
     position: absolute;
@@ -108,26 +117,6 @@ background-size: cover;
 
 
 
-.barra{
-    /* position:relative; */
-    float:left;
-    display: block;
-    width: 50%;
-    color:  rgb(170, 5, 5);
-    font-family: monospace;
-    font-size: 18px;
-}
-
-.barra::before{
-    content: "";
-    height: 2px;
-    width: 0%;
-    bottom: 0;
-    position: absolute;
-    background: linear-gradient(to right, #B06AB3, #4568DC);
-    transition: 0.3s ease width;
-    left: 0;
-}
 
 .create_input:focus~.barra::before{
     width: 100%;
@@ -136,12 +125,15 @@ background-size: cover;
 .btn_submit{
     font-family: system-ui;
     background:  rgb(170, 5, 5);
+    align-content: center;
+    size: 50px;
     border: 1px solid;
     display: block;
-    width: 80%;
-    margin: 10px auto;
+    width: 100%;
+    padding: 10px;
+    margin: 10px ;
     color: #fff;
-    height: 40px;
+    height: auto;
     font-size: 16px;
     font-weight: 500;
     border-radius: 8px;
@@ -172,7 +164,7 @@ padding: 30px;
 
 .danger {
     color: #d90429;
-    line-height: 0px;
+    line-height: 3px;
     font-size: 14px;
     margin-top: 10px;
     font-weight: bold;
@@ -198,7 +190,9 @@ display: flex;
 flex-direction: column;
 width: 30px;
 text-align: center;
-padding: 0;
+width: 5%;
+padding: 10px;
+margin: 10px ;
 height: 20px;
 background: #a4133c;
 }
@@ -216,28 +210,32 @@ margin-top: 20px;
 }
 
 .back_home {
-border-radius: 8px;
-padding: 8px;
-text-decoration: none;
-font-family: system-ui;
-background: rgb(170, 5, 5);
-border: 1px solid;
-display: block;
-width: 20%;
-margin: 10px auto;
-color: #fff;
-height: 40px;
-font-size: 16px;
-cursor: pointer;
-align-items: center;
-box-shadow: 
-0 0 2px rgb(255 240 243), 
-0 0 4px rgb(255 204 213), 
-0 0 6px rgb(255 179 193), 
-0 0 8px rgb(255 143 163), 
-0 0 10px rgb(255 117 143), 
-0 0 12px rgb(255 77 109);
-font-weight: 400;
+    font-family: system-ui;
+    background:  rgb(170, 5, 5);
+    align-content: center;
+    size: 50px;
+    border: 1px solid;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-left: 20px ;
+    color: #fff;
+    height: auto;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 
+    0 0 2px rgb(255 240 243), 
+    0 0 4px rgb(255 204 213), 
+    0 0 6px rgb(255 179 193), 
+    0 0 8px rgb(255 143 163), 
+    0 0 10px rgb(255 117 143), 
+    0 0 12px rgb(255 77 109);
+}
+
+.buttons{
+    margin-top: 500px;
 }
 
 .platformTitle{
@@ -262,4 +260,27 @@ font-weight: 400;
 .option_create{
     border-color: black;
     border-radius: 3px;
+}
+
+
+.barra{
+    /* position:relative; */
+    float:left;
+    display: block;
+    width: 50%;
+    color:  rgb(170, 5, 5);
+    font-family: monospace;
+    font-size: 18px;
+    line-height: 1px;
+}
+
+.barra::before{
+    content: "";
+    height: 1px;
+    width: 0%;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(to right, #B06AB3, #4568DC);
+    transition: 0.3s ease width;
+    left: 0;
 }

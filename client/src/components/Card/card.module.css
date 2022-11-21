@@ -4,6 +4,7 @@
     grid-template-columns: 100px, 100px, 100px;
     margin: 10px;
     
+    
 }
     
 .card {
@@ -15,17 +16,18 @@
     border-top-left-radius: 90px;
     border-bottom-right-radius: 90px;
     box-shadow: 
-    0 0 5px rgb(255 240 243),
-    0 0 7px rgb(255 204 213),
-    0 0 10px rgb(255 179 193),
-    0 0 12px rgb(255 143 163),
-    0 0 14px rgb(255 117 143),
-    0 0 16px rgb(255 77 109);
+    0 0 7px rgb(255 240 243),
+    0 0 10px rgb(255 204 213),
+    0 0 13px rgb(255 179 193),
+    0 0 16px rgb(255 143 163),
+    0 0 19px rgb(255 117 143),
+    0 0 22px rgb(255 77 109);
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
     color: #a40411;
     border-color: #121010;
     border-width: 1px;
+    border: 1px solid #a30303;
     
 }
 

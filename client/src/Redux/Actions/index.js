@@ -1,7 +1,7 @@
 import axios from "axios";
+export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const GET_GAMES_QUERY = "GET_GAMES_QUERY";
 export const GET_GENRES = "GET_GENRES";
-export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const POST_VIDEOGAME = "POST_VIDEOGAME";
 export const ORDER_FILTER = "ORDER_FILTER";
 export const FILTER_GENRES = "FILTER_GENRES";
@@ -10,98 +10,51 @@ export const GET_BY_NAME="GET_BY_NAME";
 export const CLEAN_DETAIL="CLEAN_DETAIL"
 export const GET_DETAIL_ID= "GET_DETAIL_ID";
 export const GET_PLATFORMS = 'GET_PLATFORMS';
-export const GET_VIDEOGAMES= 'GET_VIDEOGAMES';
 export const FILTER = 'FILTER';
+export const FILTER_CREATED= "FILTER_CREATED"
 export const CLEAN_FILTER= 'CLEAN_FILTER';
 export const CREATE_VIDEOGAME='CREATE_VIDEOGAME';
 export const GET_BY_ID= 'GET_BY_ID';
+export const GET_DB= "GET_DB";
+export const GET_API= "GET_API";
 export const ORDER_GAMES= "ORDER_GAMES";
 export const FILTRO_POR_TRES= 'FILTRO_POR_TRES';
 
 
 
-export function getAllVideogames() {
+export const getAllVideogames=()=> {
   return async function (dispatch) {
-    let getAllVideogames = await axios.get(`http://localhost:3001/videogames`);
-    let getAllVideogamesData = getAllVideogames.data;
+    let json = await axios.get(`http://localhost:3001/videogames`);
     return dispatch({
       type: GET_ALL_VIDEOGAMES,
-      payload: getAllVideogamesData,
+      payload: json.data,
     });
   };
 }
 
-export function getVideogames(orderBy, order, name, filterOrigin, filterGenre,) {
-  return async function (dispatch) {
-      try {
-          if (orderBy === 'default') orderBy = 'id'
-          if (name) {
-              const gamesNamed = await axios.get(`http://localhost:3001/videogames?game=${name}&orderBy=${orderBy}&order=${order}`)
-              dispatch({
-                  type: GET_VIDEOGAMES,
-                  payload: gamesNamed.data
-              })
-          } else {
-              const games = await axios.get(`http://localhost:3001/videogames?orderBy=${orderBy}&order=${order}`)
-              
-              //inicio filtrados
+export const getDb = () => async dispatch => {
+  return await axios.get('http://localhost:3001/database')
+  .then((response) => {
+      dispatch({
+        type: GET_DB,
+        payload: response.data,
 
-              if (filterOrigin === 'All' && filterGenre === 'All') {
-                  dispatch({
-                      type: GET_VIDEOGAMES,
-                      payload: games.data
-                  })
-              } else if (filterOrigin === 'creados') {
-                  let filteredGames = games.data.filter(e => e.mine)
-                  if (filterGenre !== 'All') {
-                      const doubleFiltered = filteredGames.filter((e) => { return e.genres.some((a) => a.name === filterGenre) })
-                      dispatch({
-                          type: GET_VIDEOGAMES,
-                          payload: doubleFiltered
-                      })
-                  } else {
-                      dispatch({
-                          type: GET_VIDEOGAMES,
-                          payload: filteredGames
-                      })
-                  }
-              } else if (filterOrigin === 'api') {
-                  let filteredGames = games.data.filter(e => !e.mine)
-                  if (filterGenre !== 'All') {
-                      const doubleFiltered = filteredGames.filter((e) => {
-                          return e.genre.some((a) => a === filterGenre) })
-                      dispatch({
-                          type: GET_VIDEOGAMES,
-                          payload: doubleFiltered
-                      })
-                  } else {
-                      dispatch({
-                          type: GET_VIDEOGAMES,
-                          payload: filteredGames
-                      })
-                  }
-
-                  //filtrado unicamente por genero
-
-              } else if (filterGenre !== 'All') {
-                  let filteredByGenre = games.data.filter((e) => {
-                      if (e.mine) {
-                          return e.genres.some((a) => a.name === filterGenre)
-                      } else {
-                          return e.genre.some((a) => a === filterGenre)
-                      }
-                  })
-                  dispatch({
-                      type: GET_VIDEOGAMES,
-                      payload: filteredByGenre
-                  })
-              }
-          }
-      } catch (error) {
-          console.log(error)
-      }
-  }
+      });
+      console.log("RESPUESTA", response.data)
+    });  
 }
+
+export const getApi = () => async dispatch => {
+  return await axios.get('http://localhost:3001/Api')
+  .then((response) => {
+      dispatch({
+        type: GET_API,
+        payload: response.data,
+      });
+    });  
+}
+
+
 
 export function getGamesByQuery(title) {
   return async function (dispatch) {
@@ -114,7 +67,7 @@ export function getGamesByQuery(title) {
       payload: gamesData });
   };
 }
-export function searchVideoGames(name){
+export const searchVideoGames=(name)=>{
   return async(dispatch)=>{
       try {
           const json=await axios.get('http://localhost:3001/videogames?name='+name)
@@ -129,16 +82,13 @@ export function searchVideoGames(name){
   }
 }
 
-export function getGamesGenre() {
+export const getGamesGenre=()=> {
   return async function (dispatch) {
     let getGenre = await axios.get(`http://localhost:3001/genres`);
     let getGenreData = getGenre.data;
     return dispatch({ type: GET_GENRES, payload: getGenreData });
   };
 }
-
-
-
 
 
 export const getDetailId = (id) =>{
@@ -163,7 +113,6 @@ export const getGameId = (id) => {
   return async function (dispatch) {
       try{
       const gameId = await axios.get(`/videogames/${id}`);
-     
       return dispatch ({
           type: GET_BY_ID,
           payload: gameId.data
@@ -173,53 +122,51 @@ export const getGameId = (id) => {
       } 
   }
 }
-export function postVideogame(game) {
+export const postVideogame=(payload)=> {
   return async function () {
     try {
-       await axios.post("http://localhost:3001/videogame", game);
+       const response= await axios.post("http://localhost:3001/videogame", payload);
+       return response
     } catch (error) {
       console.log(error.message)
     }
   };
 };
 
-export function createVideogame(payload) {
-  return async function () {
-      try {
-          let created= await axios.post("http://localhost:3001/videogames/post", payload);
-          return created;
-      } catch (error) {
-          console.log(error.message)
-      }
-  }
+export const filterCreated=(payload)=> {
+  return {
+    type: FILTER_CREATED,
+    payload,
+  };
 }
 
 
-export function orderFilter(type) {
-  return async function (dispatch) {
-    return dispatch({ type: ORDER_FILTER, payload: type });
-  };
-};
 
-export function orderedGames(type){
+export const orderedGames=(type)=>{
   return async function(dispatch){
     return dispatch({type:ORDER_GAMES, payload:type})
   }
 };
 
-export function filterGenres(data) {
+export const orderFilter=(type)=> {
+  return async function (dispatch) {
+    return dispatch({ type: ORDER_FILTER, payload: type });
+  };
+};
+
+export const filterGenres=(data)=> {
   return async function (dispatch) {
     return dispatch({ type: FILTER_GENRES, payload: data });
   };
 }
 
-export function home(payload){
+export const home=(payload)=>{
   return{
       type: HOME,
       payload
   }
 }
-export function filter(value) {
+export const filter=(value)=> {
   return async function (dispatch) {
       dispatch({
           type: FILTER,
@@ -227,14 +174,14 @@ export function filter(value) {
       })
   }
 }
-export function cleanFilter() {
+export const cleanFilter=()=> {
   return {
     type: "CLEAN_FILTER",
     payload: [],
   };
 }
 
-export function getPlatforms() {
+export const getPlatforms=()=> {
   return async function (dispatch) {
     try {
       let call = await axios.get("http://localhost:3001/platforms");
@@ -248,7 +195,7 @@ export function getPlatforms() {
   };
 }
 
-export function filtrarPorTres(){
+export const filtrarPorTres=()=>{
   return async function(dispatch){
     dispatch({
       type: FILTRO_POR_TRES,

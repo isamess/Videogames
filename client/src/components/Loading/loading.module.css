@@ -6,7 +6,7 @@
         background-repeat: no-repeat;
     } */
 
-    *,
+    /* *,
 *:after,
 *:before {
   margin: 0;
@@ -14,12 +14,13 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-}
+} */
 
-.conteiner {
-  background: grey;
-  height: 100%;
-  width: 100%;
+.container {
+  background: url('../../assets/playstation-joystick.jpg');
+  height: 60vh;
+  width: 200vh;
+  margin-top: -44px;
   position: absolute;
   left: 0;
   right: 0;
@@ -39,9 +40,11 @@
   border-radius: 100%;
   margin-bottom: 40px;
   margin-top: 100px;
+  margin-left: 650px;
   -webkit-animation: girar 1.5s linear infinite;
   -o-animation: girar 1.5s linear infinite;
   animation: girar 1.5s linear infinite;
+
 }
 
 @keyframes girar {
@@ -54,9 +57,71 @@
 }
 
 .loadingTitle {
-  color: wheat;
+  display:flex ;
+  /* color: wheat; */
+  position: absolute;
+  text-align: center;
+  margin-top: -120px;
+  margin-left: 600px;
+  color: #fff;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #0fa,
+      0 0 82px #0fa,
+      0 0 92px #0fa,
+      0 0 102px #0fa,
+      0 0 151px #0fa;
+}
+.Btn {
+  grid-column: 2/3;
+  grid-row: 4/5;
+  padding-top:50px;
+  /* background-color: rgba(0, 0, 0, 0.849); */
+}
+.Btn button{
+  background-color: rgba(0, 0, 0, 0.705);
+  color: rgb(255, 255, 255);
+  font-size: medium;
+  border: 2px solid rgb(27, 27, 27);
+  margin-top: 30px;
+  width: 300px;
+  height: 30px;
+}
+.refresh{
+  display:flex;
+  margin-left: 1250px;
+  margin-top: 90px;
+  border-radius: 50%;
+  background-color:rgb(240, 213, 78);
+  color:rgb(83, 20, 20);
+  font-weight: bold;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  justify-content: center;
+  padding-top:25px;
+  margin-right:10px;
+  
+}
+
+.demo_wrap {
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px dashed green;
+}
+.demo_wrap h1 {
+  padding: 100px;
+  position: relative;
+  z-index: 2;
+}
+.demo_wrap img {
   position: absolute;
   left: 0;
-  right: 0;
-  text-align: center;
+  top: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0.6;
 }

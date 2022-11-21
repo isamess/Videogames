@@ -1,62 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&display=swap');
+
+.navContainer{
+  display:flex;
+  flex-direction: row;
+}
 .navBar{
   background-image: url('../../assets/BannerNeónAzulVioletaChico.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  width: 200vh;
+  height: 40vh;
   font-family: monospace;
-  display: inherit;
+  display: flex;
   font-size: 20px;
   font-weight: bold;
-  padding: auto;
-  border-bottom: 8px;
+  justify-content: space-around;
+  border-bottom: 10px;
   border-bottom-style:groove;
   border-bottom-color: rgb(205, 3, 164, 0.6);
+  margin-left: 0%;
+  margin-right: 0%;
   
 }
-  .ulnav {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    .linav {
-      float: left;
-      margin-left: 10px;
-    }
-    .linav :hover:not(.active) {
-      background-color: rgb(202, 12, 219);
-     
-    }
-  .navitem{ 
-      display: block;
-      color: rgb(217, 241, 36);
-      text-align: center;
-      padding: 18px 19px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 25px;
-      background-color: transparent;
-      -webkit-text-stroke: 1px rgb(169, 4, 4);
-      border-color: transparent;
-    }
-    .active {
-      background-color: #730606;
-      float: right;
-    }
+.inline{
+  display: flex;
+  flex-direction: column;
+}
+.logo{
+  margin-top: 1px;
+  margin-left: 50px;
+}
+.homeButton{
+	box-shadow: -3px 4px 6px 0px #899599;
+	background:linear-gradient(to bottom, #ccb479 5%, #ffe297 100%);
+	background-color: rgb(240, 213, 78);
+	border-radius:15px;
+	border:1px solid #a30303;
+	display:inline-block;
+	cursor:pointer;
+	color: rgb(107, 4, 4);
+	font-family:Georgia, 'Times New Roman', Times, serif;
+	font-size:17px;
+  font-weight: bold;
+	padding:7px 25px;
+  margin: 30px 10px 10px 10px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #e1e2ed;
+}
+.homeButton:hover {
+	background:linear-gradient(to bottom, #ffe297 5%, #ccb479 100%);
+	background-color:#da1010;
+}
+.homeButton:active {
+	position:relative;
+	top:1px;
+}
 
-    .home{
-      font-size: large;
-      margin-top: 12px;
-      margin-left: 10px;
-    }
-    .back{
-      display:block;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      color:rgb(83, 20, 20);
-      font-weight: bold;
-      background-color:rgb(240, 213, 78);
-      margin-left:1200px;
-      
-      
-    }
+.h3{
+  font-family: 'DM Serif Display', serif;
+  color:white;
+  font-size: 20px;
+  font-weight: 100;
+  -webkit-text-stroke: 0.2px black;
+  text-shadow:
+  0 2px 0px #030a0e,
+  2px 0 0px #101c21,
+  2px 3px 2px #1e2c33,
+  3px 2px 2px #6e7578;
+  margin-left: 150px;
+}
+
+.h3_2{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ 
+  color:aliceblue;
+  font-size: 16px;
+  text-align: right;
+  font-weight: 100;
+  line-height: 1px;
+  margin-right: 60px;
+}
+.h3_3{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color:aliceblue;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 100;
+  line-height: 2px;
+}
+.buttonsContainer{
+  margin-right: 190px;
+}

@@ -15,14 +15,8 @@ router.use('/platforms', platformRouter );
 
 
 
-
-
-
-
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-
-
 
 
 

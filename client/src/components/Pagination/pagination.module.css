@@ -6,26 +6,30 @@
 
 .nav button {
     outline: none;
-    border: none;
     margin-left: 9px;
     padding: 9px 12px;
     font-weight: bold;
-    font-size: 14px;
-    background-color: #064575;
-    color: #FF4C29;
+    font-size: 20px;
+    background: #ccac44;
+    color: #731502;
     cursor: pointer;
-    box-shadow: 3px 2px 8px rgba(250, 247, 247, 0.3);
+    box-shadow: 3px 2px 8px rgba(250, 247, 247, 0.8);
     transition: all 0.17s ease-in;
     border-radius: 4px;
+    border: 1px solid #a30303;
 }
 
 .nav button:hover {
-    background-color: #FF4C29;
-    color: #064575;
+    background-color:#e164c8;
+    color: #a1e595; 
+}
+.nav button:focus{
+    background-color:#731502; 
+    color:#ccac44;
 }
 
+
 @media only screen and (max-width:768px){
-    
 .nav button {
     margin-bottom: 10px;
 }

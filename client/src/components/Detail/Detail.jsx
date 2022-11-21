@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDetailId, cleanDetail, getPlatforms} from '../../Redux/Actions';
 import { useParams} from "react-router-dom";
 import s from './detail.module.css';
+// import Error404 from '../Error404/Error404.jsx'
 
 
 const Detail = () => {
