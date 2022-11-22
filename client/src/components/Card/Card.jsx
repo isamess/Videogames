@@ -12,8 +12,10 @@ return (
     <div className={s.cardinfo}>
         <h3 className={s.nametxt}>{name}</h3>
     <div className={s.cardrating}>{rating}</div>
-    <div className={s.cardinfotext}>{genres.join(" - ")}
-      
+    <div className={s.cardinfotext}>
+        <p className={s.textOverflow}>
+        {genres.join(" - ")}
+        </p>
 
     </div>
     </div>
