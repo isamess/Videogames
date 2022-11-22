@@ -25,10 +25,7 @@ function App() {
         </Switch>
       </React.Fragment>
     </div>
-    
     </BrowserRouter>
-
-    
 );
 }
 

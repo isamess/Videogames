@@ -218,7 +218,7 @@ return (
 <form id='form'  className={s.box_form} 
     onSubmit={(e) => handleSubmit(e)}>
     <div className={s.form}>
-        <h2 className={s.titulo}>CREATE YOUR OWN VIDEO AND WIN THE GAME!</h2>
+        <h2 className={s.titulo}>CREATE YOUR OWN AND WIN THE GAME!</h2>
 
 {/* NAME */}
         <div className={s.grupo}>
@@ -228,7 +228,7 @@ return (
             type='text'
             required
             name='name'
-            placeholder="Name..."
+            placeholder="Name the game..."
             value={input.name}
             onChange={(e) => handleChange(e)}
             />

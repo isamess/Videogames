@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetailId, cleanDetail, getPlatforms} from '../../Redux/Actions';
-import { useParams} from "react-router-dom";
+import { useParams, Link} from "react-router-dom";
 import s from './detail.module.css';
-// import Error404 from '../Error404/Error404.jsx'
+
+
 
 
 const Detail = () => {
@@ -55,12 +56,18 @@ return (
                     </div>
                 </div>
             </div>
+           
                     <div>
                         <div className={s.description}>
                         <h2 className={s.h2}>Description</h2>
                         {game.description?.replace(regex, '').replace('&#39', '')}
                         </div>
                     </div>
+                    <div >
+                <Link to ='/home'>
+                <button className={s.homeButton}> Go Home!</button>
+                </Link>
+            </div>
         </div>
         }
     </div>  

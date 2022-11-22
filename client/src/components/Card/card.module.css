@@ -72,9 +72,9 @@
     color:#731502;
     margin: -1px;
     font-size: 16px;
-    white-space: nowrap;
+    /* white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
+    overflow: hidden; */
 }
 
 

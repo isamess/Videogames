@@ -57,7 +57,6 @@ const  getVideogamesFromDb= async()=>{
         }
     });
     return videogames;
-
 };
 
 //TODO: get all videogames
@@ -71,9 +70,7 @@ const  getAllVideogames= async()=>{
 
 
 const searchVideogamesInApi= async(name)=> {
-    
     let searchName = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)
-    
     try {
         const videoSearch= await searchName.data.results.map(game=>{
             return{
@@ -105,7 +102,6 @@ const searchVideogamesByID= async(id)=> {
     const dbVideogames = await getVideogamesFromDb();
     let videogame = dbVideogames.find(game => game.id === id);
     if (videogame) return videogame;
-
     //Si no lo encuentra lo buscamos en la api
     try{
     let { data } = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
@@ -127,11 +123,10 @@ const searchVideogamesByID= async(id)=> {
 }
 
 
-// Genres from Api saved in Db
+//TODO: Genres from Api saved in Db
 const getGenres= async()=>{
     try {
         const response= await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
-
    const  apiGenres= response.data.results.map(genre=>{
         // console.log(response)
             return{
@@ -151,7 +146,7 @@ const getGenres= async()=>{
 };
 
 
-//get genres in Db
+//TODO: get genres in Db
 const getGenresFromDb= async()=>{
     try {
         let genDb= await Genre.findAll();

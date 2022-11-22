@@ -52,8 +52,10 @@ align-items: center;
 
 .create_input {
     background: none;
-    color: #504e4e;
+    color: #0d0d0d;
     font-size: 14px;
+font-family: 'Times New Roman', Times, serif;
+font-style: bold;
     padding: 4px 10px 10px 5px;
     display: block;
     width: 100%;
@@ -63,7 +65,7 @@ align-items: center;
 
 .create_input:focus {
     outline: none;
-    color:#504e4e;
+    color:#0c0c0c;
     
 }
 
@@ -71,8 +73,13 @@ align-items: center;
 .create_input:valid~.label {
     top: -14px;
     font-size: 15px;
-    color: #504e4e;
+    color: #100f0f;
+    font-style: bold;
 }
+.create_input:focus~.barra::before{
+    width: 100%;
+}
+
 
 .textarea {
     width: 470px;
@@ -113,13 +120,6 @@ align-items: center;
     left: 5px;
     transition: 0.5s all;
     pointer-events: none;
-}
-
-
-
-
-.create_input:focus~.barra::before{
-    width: 100%;
 }
 
 .btn_submit{

@@ -9,7 +9,7 @@ import Pagination from '../Pagination/Pagination.jsx';
 import Filters from '../Filters/Filters.jsx'
 import NavBar from '../NavBar/NavBar';
 import Loading from '../Loading/Loading';
-// import Loading from '../Loading/Loading'
+
 
 const Home = () => {
   //TODO: local states
@@ -22,14 +22,17 @@ const Home = () => {
   const filteredGames = useSelector((state) => state.filteredGames);
 
   const [posts, setPosts] = useState(videogames);
+  //Filters
   const orderBy = useSelector((state) => state.orderedBy);
   const filteredBy = useSelector((state) => state.filteredBy);
 
+//Paginate
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = currentpage => setCurrentPage(currentpage);
+
 
   useEffect(() => {
     if (!videogames.length) {
@@ -40,7 +43,7 @@ const Home = () => {
   }, [dispatch, videogames]);
 
   useEffect(() => {
-    if (filteredBy === "ALL" && orderBy === "ALL") {
+    if (filteredBy === "ALL" ) {
       setPosts(videogames);
     } else {
       setPosts(filteredGames);
@@ -48,6 +51,14 @@ const Home = () => {
     setCurrentPage(1);
   }, [videogames, filteredGames, filteredBy, orderBy]);
 
+  useEffect(() => {
+    if ( orderBy === "ALL") {
+      setPosts(videogames);
+    } else {
+      setPosts(filteredGames);
+    }
+    setCurrentPage(1);
+  }, [videogames, filteredGames, filteredBy, orderBy]);
 
 
   return (

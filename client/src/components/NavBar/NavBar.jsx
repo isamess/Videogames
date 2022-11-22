@@ -42,7 +42,7 @@ const NavBar=()=> {
           
           <div className={s.inline}><SearchBar/></div>
           <div>
-            <h3 className={s.h3}>"By crossing this small border between the real world and the game world <br/> has the result that during the game one is relaxed and can escape from the real world<br/> and then return relaxed and happy"</h3>
+            <h3 className={s.h3}>"By crossing this small border between the real world and the game world <br/> has the result that during the game one is relaxed and can escape from <br/>the real world and then return relaxed and happy"</h3>
             <h3 className={s.h3_2}>Wolfgang Kramer</h3>
             <h3 className={s.h3_3}>What is a game for you?...</h3>
           </div>
