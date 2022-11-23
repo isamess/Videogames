@@ -16,14 +16,12 @@ function App() {
   return (
     <BrowserRouter>
     <div className="App">
-      <React.Fragment>
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/addgame" component={CreateVideogame} />
           <Route exact path="/videogame/:id" component={Detail} />
         </Switch>
-      </React.Fragment>
     </div>
     </BrowserRouter>
 );

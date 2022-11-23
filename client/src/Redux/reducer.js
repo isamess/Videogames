@@ -13,7 +13,6 @@ GET_DETAIL_ID,
 CLEAN_DETAIL,
 GET_PLATFORMS,
 CREATE_VIDEOGAME,
-// GET_VIDEOGAMES,
 GET_BY_ID,
 GET_DB,
 GET_API,
@@ -86,12 +85,7 @@ switch (action.type) {
         filteredGames: action.payload,
         videogame: action.payload
     };
-    // case GET_VIDEOGAMES: {
-    //     return {
-    //         ...state,
-    //         videogames: action.payload
-    //     }
-    // }
+    
     case GET_BY_NAME:
         return{
             ...state,
@@ -146,8 +140,6 @@ switch (action.type) {
         filteredBy: action.payload,
     };
 }
-
-
 
 case ORDER_GAMES:
     switch(action.payload){

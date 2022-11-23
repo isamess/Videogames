@@ -140,8 +140,6 @@ export const filterCreated=(payload)=> {
   };
 }
 
-
-
 export const orderedGames=(type)=>{
   return async function(dispatch){
     return dispatch({type:ORDER_GAMES, payload:type})
