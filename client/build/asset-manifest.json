@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.be97ad6e.css",
+    "main.js": "/static/js/main.c9dc9abb.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/backgroundLegend2.jpg": "/static/media/backgroundLegend2.05a1c970467c463d9664.jpg",
+    "static/media/animeGirlPresentando2.png": "/static/media/animeGirlPresentando2.7283adbbc2c1e6d40fd4.png",
+    "static/media/anime-girl3.jpg": "/static/media/anime-girl3.5153ff0f02ef4028e8d7.jpg",
+    "static/media/playstation-joystick.jpg": "/static/media/playstation-joystick.9271d817ac64e399452c.jpg",
+    "static/media/BannerNeónAzulVioletaChico.jpg": "/static/media/BannerNeónAzulVioletaChico.ab374b7420caa008f7e0.jpg",
+    "static/media/joystick-xbox.jpg": "/static/media/joystick-xbox.8af8c09564c98dd6a7c2.jpg",
+    "index.html": "/index.html",
+    "main.be97ad6e.css.map": "/static/css/main.be97ad6e.css.map",
+    "main.c9dc9abb.js.map": "/static/js/main.c9dc9abb.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.be97ad6e.css",
+    "static/js/main.c9dc9abb.js"
+  ]
+}
