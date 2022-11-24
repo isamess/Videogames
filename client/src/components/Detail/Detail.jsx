@@ -56,18 +56,17 @@ return (
                     </div>
                 </div>
             </div>
-           
-                    <div>
-                        <div className={s.description}>
-                        <h2 className={s.h2}>Description</h2>
-                        {game.description?.replace(regex, '').replace('&#39', '')}
-                        </div>
+                <div>
+                    <div className={s.description}>
+                    <h2 className={s.h2}>Description</h2>
+                    {game.description?.replace(regex, '').replace('&#39', '')}
                     </div>
-                    <div >
-                <Link to ='/home'>
-                <button className={s.homeButton}> Go Home!</button>
-                </Link>
-            </div>
+                </div>
+                <div >
+            <Link to ='/home'>
+            <button className={s.homeButton}> Go Home!</button>
+            </Link>
+        </div>
         </div>
         }
     </div>  
