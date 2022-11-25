@@ -193,3 +193,5 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 - [ ] Al menos tener un componente del frontend con sus tests respectivos
 - [ ] Al menos tener una ruta del backend con sus tests respectivos
 - [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fb38dc5b-a34f-42f8-bb31-8eb1f7cb162d/deploy-status)](https://app.netlify.com/sites/videogamesforall/deploys)
