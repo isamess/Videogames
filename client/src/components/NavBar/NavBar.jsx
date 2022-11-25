@@ -4,7 +4,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import {NavLink} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import {getAllVideogames} from '../../Redux/Actions';
-import { filtrarPorTres } from '../../Redux/Actions';
+// import { filtrarPorTres } from '../../Redux/Actions';
 import logo from '../../assets/animeGirlPresentando2.png';
 
 
@@ -20,11 +20,11 @@ const NavBar=()=> {
   //   window.location.reload();
   // };
 
-  const handlePorTres=(e)=>{
-    e.preventDefault();
-    dispatch(filtrarPorTres());
-    console.log(e)
-  }
+  // const handlePorTres=(e)=>{
+  //   e.preventDefault();
+  //   dispatch(filtrarPorTres());
+  //   console.log(e)
+  // }
 
 
   return (
@@ -38,7 +38,7 @@ const NavBar=()=> {
           <button className={s.homeButton} onClick={(e)=>handleClick(e)}>Refresh</button>
           <NavLink to="/"><button className={s.homeButton}>Back</button></NavLink>
 
-          <button  className={s.homeButton} onClick={(e)=>handlePorTres(e)}>3 Genres Games</button>
+          {/* <button  className={s.homeButton} onClick={(e)=>handlePorTres(e)}>3 Genres Games</button> */}
           
           <div className={s.inline}><SearchBar/></div>
           <div>
